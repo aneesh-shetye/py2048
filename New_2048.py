@@ -214,15 +214,24 @@ def on_press(key):
         	print(' ')
         else:
         	print("Invalid input")
-
+        win_flag=win(tyles=tyles, win_no=win_no)
+        if win_flag==1:
+        	print("!!!You won!!!")
+        	Key.esc
+        end_flag=end(tyles)
+        if end_flag==1:
+        	print("!!!You Lost!!!")
+        	Key.esc
 
     except AttributeError: 
         print('special key {0} pressed'.format(key)) 
 
 
+
 def on_release(key): 
 
     if key == Key.esc: 
+
         # Stop listener 
         return False
 
