@@ -235,9 +235,6 @@ def on_release(key):
         # Stop listener 
         return False
 
-    fill(tyles)
-    custom_print(tyles)
-    print(' ')
 
 
 with Listener(on_press = on_press, 
