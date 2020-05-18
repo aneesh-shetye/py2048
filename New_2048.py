@@ -13,13 +13,20 @@ n=values.n
 win_no=values.win_no
 
 if type(n)==str:
-	n=int(n)
+	try:
+		n=int(n)
+	except ValueError:
+		print("Invalid Input Hence we go with n=5")
+		n=5
 else: 
     n=5
 
 
 if type(win_no)==str:
-	win_no=int(win_no)
+	try:
+		win_no=int(win_no)
+	except ValueError:
+		print("Invalid Input Hence we go with w=2048")
 else: 
 	win_no=2048
 
@@ -175,49 +182,46 @@ print(" ")
 from pynput.keyboard import Key, Listener 
 
 def on_press(key): 
-    
- 
-    
+
+
+
     try: 
+        #print('alphanumeric key {0} pressed'.format(type(key.char))) 
         if key.char=='w':
-           clear_screen()
+           clear()
            up(tyles)
+           fill(tyles)
            custom_print(tyles)
            print(' ')
         elif key.char=='a':
-           clear_screen()
+           clear()
            left(tyles)
+           fill(tyles)
            custom_print(tyles)
            print(' ')
         elif key.char=='s':
-            down(tyles)
-            custom_print(tyles)
-            print(' ')
-        elif key.char=='d':
-            right(tyles) 
-            custom_print(tyles)
-            print(' ')
+        	clear()
+        	fill(tyles)
+        	down(tyles)
+        	custom_print(tyles)
+        	print(' ')
 
+        elif key.char=='d':
+        	clear()
+        	fill(tyles)
+        	right(tyles)
+        	custom_print(tyles)
+        	print(' ')
         else:
-        	print("You clicked the wrong key")
-        win_flag=win(tyles=tyles, win_no=win_no)
-        if win_flag==1:
-        	print("!!!You  won!!!")
-        end_flag=end(tyles)
-        if end_flag==1:
-        	print("!!!You lost try agaim!!!")
+        	print("Invalid input")
+
 
     except AttributeError: 
         print('special key {0} pressed'.format(key)) 
-        win_flag=win(tyles=tyles, win_no=win_no)
-        if win_flag==1:
-        	print("!!!You  won!!!")
-        end_flag=end(tyles)
-        if end_flag==1:
-        	print("!!!You lost try agaim!!!")
-            
+
+
 def on_release(key): 
-                    
+
     if key == Key.esc: 
         # Stop listener 
         return False
@@ -229,5 +233,5 @@ def on_release(key):
 
 with Listener(on_press = on_press, 
             on_release = on_release) as listener: 
-                    
-    listener.join() 	
+
+    listener.join()
